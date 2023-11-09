@@ -53,7 +53,7 @@
     
             </tbody>
         </table>
-        
+
     {{$projects->links('pagination::bootstrap-5')}}
 
 </div>
