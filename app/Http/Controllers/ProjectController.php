@@ -14,7 +14,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::orderByDesc('id')->paginate(10);
+        // $projects = Project::all();
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -31,6 +32,13 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validated = $request ->validate([
+            'title'=>'required|unique|max:50|min:4',
+            'description'=>'nullable|max:1000|min:3',
+            'authors'=>'nullable|max:1000|min:3'
+        ]);
+
         $project = new Project();
         $project->description = $request->description;
         $project->title = $request->title;

@@ -4,6 +4,17 @@
 
 <h1>Create</h1>
 <div class="col-6 mx-auto shadow p-4">
+
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
     <form action="{{ route('project.store') }}" method="post">
 
         @csrf
