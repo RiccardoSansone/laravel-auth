@@ -2,9 +2,9 @@
 
 @section('content')
 
-<h1>Create</h1>
+<h1 class="text-center mt-5">DETAILS OF SINGLE PROJECT</h1>
 
-<div class="table-responsive mt-5">
+<div class="table-responsive mt-3">
     <table class="table table-primary">
         <thead>
             <tr>

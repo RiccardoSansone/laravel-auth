@@ -2,8 +2,10 @@
 
 @section('content')
 
-<h1>Create</h1>
-<div class="col-6 mx-auto shadow p-4">
+
+<div class="col-6 mx-auto shadow p-4 mt-4">
+
+    <h1>ADD NEW PROJECT</h1>
 
     @if ($errors->any())
     <div class="alert alert-danger">

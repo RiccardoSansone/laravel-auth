@@ -2,10 +2,10 @@
 
 @section('content')
 
-<h1>Edit</h1>
+
 
 <div class="col-6 mx-auto">
-
+    <h1 class="text-center mt-4">EDIT YOUR PROJECT</h1>
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
