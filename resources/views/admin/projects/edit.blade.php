@@ -5,6 +5,18 @@
 <h1>Edit</h1>
 
 <div class="col-6 mx-auto">
+
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+
     <form action="{{ route('project.update', $project) }}" method="post">
 
         @csrf

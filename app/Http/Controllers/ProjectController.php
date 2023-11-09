@@ -60,6 +60,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        
+
         return view('admin.projects.edit', compact('project'));
     }
 
@@ -68,6 +70,13 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+
+        $validated = $request ->validate([
+            'title'=>'required|unique|max:50|min:4',
+            'description'=>'nullable|max:1000|min:3',
+            'authors'=>'nullable|max:1000|min:3'
+        ]);
+
         $data = $request->all();
         $project->update($data);
         return redirect()->route('project.show', $project->id);
