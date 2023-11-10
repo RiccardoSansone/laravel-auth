@@ -17,7 +17,7 @@
     @endif
 
 
-    <form action="{{ route('project.update', $project) }}" method="post">
+    <form action="{{ route('project.update', $project) }}" method="post" enctype="multipart/form-data">
 
         @csrf
 
@@ -39,7 +39,12 @@
             <input type="text" class="form-control p-2" name="authors" id="authors" aria-describedby="help" placeholder="Write authors" value="{{ old('authors') }}">
             <small id="authorsHelper" class="form-text text-muted">write the authors of your project</small>
         </div>
-
+        
+        <div class="mb-3">
+            <label for="thumb" class="form-label">Scegli una immagine</label>
+            <input type="file" class="form-control" name="thumb" id="thumb" placeholder="Scegli una immagine per il tuo progetto" aria-describedby="thumb_helper" value="{{ old('thumb') }}">
+            <div id="thumb_helper" class="form-text">Inserisci una immagine</div>
+        </div>
 
         <button type="submit" class="btn btn-primary 3">Add Project</button>
     </form>

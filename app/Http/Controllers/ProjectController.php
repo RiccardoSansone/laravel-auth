@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -33,18 +34,31 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
 
-        $validated = $request ->validate([
-            'title'=>'required|unique|max:50|min:4',
-            'description'=>'nullable|max:1000|min:3',
-            'authors'=>'nullable|max:1000|min:3'
+
+        $validated = $request->validate([
+            'title' => 'required|max:50|min:2',
+            'description' => 'nullable|max:1000|min:2',
+            'authors' => 'nullable|max:50|min:2',
+            'thumb' => 'nullable|mimes:jpg,bmp,png|max:300',
         ]);
 
         $project = new Project();
+
+
+
+        if ($request->has('thumb')) {
+            $file_path =  Storage::put('projects_images', $request->thumb);
+            $project ->thumb = $file_path;
+        }
+
+        $project->githublink = $request->githublink;
+        $project->projectlink = $request->projectlink;
         $project->description = $request->description;
         $project->title = $request->title;
         $project->authors = $request->authors;
         $project->save();
         return to_route('project.index');
+
     }
 
     /**
@@ -72,12 +86,20 @@ class ProjectController extends Controller
     {
 
         $validated = $request ->validate([
-            'title'=>'required|unique|max:50|min:4',
+            'title'=>'required|max:50|min:4',
             'description'=>'nullable|max:1000|min:3',
             'authors'=>'nullable|max:1000|min:3'
         ]);
 
         $data = $request->all();
+
+        
+        if ($request->has('thumb')) {
+            $file_path =  Storage::put('projects_images', $request->thumb);
+            $project ->thumb = $file_path;
+            $data['thumb'] = $file_path;
+        }
+
         $project->update($data);
         return redirect()->route('project.show', $project->id);
     }
